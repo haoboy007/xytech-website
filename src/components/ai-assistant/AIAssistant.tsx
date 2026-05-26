@@ -136,8 +136,13 @@ export default function AIAssistant() {
     }
 
     try {
-      await supabase.functions.invoke("xiaoxiong-feishu", {
-        body: {
+      const resp = await fetch(`${supabaseUrl}/functions/v1/xiaoxiong-feishu`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${supabaseAnonKey}`,
+        },
+        body: JSON.stringify({
           messages: messages.map((m) => ({ role: m.role, content: m.content })),
           contact: {
             name: contact.name || undefined,
@@ -148,8 +153,11 @@ export default function AIAssistant() {
             intent: contact.intent || undefined,
           },
           source: "website-ai-assistant",
-        },
+        }),
       });
+      if (!resp.ok) {
+        console.error("Feishu push failed:", resp.status, await resp.text());
+      }
       setContactSubmitted(true);
       setTimeout(() => {
         setShowContactForm(false);
@@ -326,6 +334,9 @@ export default function AIAssistant() {
                   {isStreaming ? <Loader2 size={16} className="animate-spin" /> : <Send size={16} />}
                 </button>
               </div>
+              <p className="text-[10px] text-muted-foreground/60 mt-1.5 text-center leading-tight">
+                对话内容将同步至企业协作平台，便于商务顾问回访跟进
+              </p>
             </div>
 
             {/* 留资表单弹窗 */}
@@ -352,6 +363,9 @@ export default function AIAssistant() {
                           <h3 className="text-base font-semibold text-foreground">留下联系方式</h3>
                           <p className="text-xs text-muted-foreground mt-1">
                             让专业顾问为您提供一对一方案
+                          </p>
+                          <p className="text-[10px] text-muted-foreground/50 mt-1">
+                            信息将同步至企业协作平台，用于回访跟进
                           </p>
                         </div>
 
@@ -438,6 +452,9 @@ export default function AIAssistant() {
                         <h3 className="text-base font-semibold text-foreground">提交成功！</h3>
                         <p className="text-xs text-muted-foreground mt-2">
                           我们的商务顾问会尽快与您联系
+                        </p>
+                        <p className="text-[10px] text-muted-foreground/50 mt-1">
+                          对话记录已推送至协作平台，顾问将参考上下文回访
                         </p>
                       </div>
                     )}
