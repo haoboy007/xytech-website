@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
-import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
 import About from "@/components/About";
-import Partners from "@/components/Partners";
 import Business from "@/components/Business";
-import XYAIPlatform from "@/components/XYAIPlatform";
-import ThinkTank from "@/components/ThinkTank";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import Hero from "@/components/Hero";
+import Navbar from "@/components/Navbar";
+import Partners from "@/components/Partners";
+import JsonLd, { faqLd, organizationLd, websiteLd } from "@/components/seo/JsonLd";
 import SeoHelmet from "@/components/seo/SeoHelmet";
-import JsonLd, { organizationLd, websiteLd, faqLd } from "@/components/seo/JsonLd";
+import ThinkTank from "@/components/ThinkTank";
+import XYAIPlatform from "@/components/XYAIPlatform";
 
 // 首页FAQ结构化数据（GEO优化）
 const homepageFaq = faqLd([
@@ -27,7 +27,7 @@ const homepageFaq = faqLd([
   },
   {
     question: "如何联系雄元科技合作？",
-    answer: "您可以通过官网AI智能助手（右下角悬浮窗）进行实时咨询，或在联系页面填写表单，也可以拨打商务电话18610316281或发送邮件至18610316281@163.com。",
+    answer: "您可以通过官网AI智能助手（右下角悬浮窗）进行实时咨询，或在联系页面填写表单，也可以拨打商务电话18610316281或发送邮件至hezuo@cnxy.tech。",
   },
 ]);
 

@@ -49,7 +49,7 @@ export const organizationLd = {
   contactPoint: {
     '@type': 'ContactPoint',
     contactType: '商务咨询',
-    email: '18610316281@163.com',
+    email: 'hezuo@cnxy.tech',
     telephone: '+8618610316281',
   },
 };
