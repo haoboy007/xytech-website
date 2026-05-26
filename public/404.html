@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>雄元科技</title>
+  <script>
+    // GitHub Pages SPA 路由回退脚本
+    // 将当前路径保存到 sessionStorage，然后重定向到首页
+    (function() {
+      var isCustomDomain = !window.location.hostname.includes('github.io');
+      var basePath = isCustomDomain ? '/' : '/xytech-website/';
+      var fullPath = window.location.pathname + window.location.search + window.location.hash;
+      sessionStorage.setItem('spa-redirect', fullPath);
+      window.location.replace(basePath);
+    })();
+  </script>
+</head>
+<body>
+  <p style="font-family: system-ui, sans-serif; text-align: center; margin-top: 40vh; color: #666;">
+    页面跳转中...
+  </p>
+</body>
+</html>

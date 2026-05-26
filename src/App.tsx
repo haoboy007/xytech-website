@@ -1,14 +1,16 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { Navigate, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import AIAssistant from '@/components/ai-assistant/AIAssistant';
 import IntersectObserver from '@/components/common/IntersectObserver';
 import { Toaster } from '@/components/ui/sonner';
-import AIAssistant from '@/components/ai-assistant/AIAssistant';
 
 import { routes } from './routes';
 
+const basename = import.meta.env.BASE_URL?.replace(/\/$/, '') || '';
+
 const App: React.FC = () => {
   return (
-    <Router>
+    <Router basename={basename}>
       <IntersectObserver />
       <div className="flex flex-col min-h-screen">
         <main className="flex-grow">
