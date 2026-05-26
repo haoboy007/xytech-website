@@ -1,0 +1,57 @@
+name: Deploy to Aliyun Server
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build production bundle
+        run: npm run build
+
+      - name: Remove Miaoda CDN link
+        run: sed -i '/<link rel="stylesheet" id="fonts-code"/d' dist/index.html
+
+      - name: Verify build output
+        run: |
+          echo "=== Build output ==="
+          ls -la dist/
+          echo "=== File count ==="
+          find dist -type f | wc -l
+          echo "=== File size ==="
+          du -sh dist/
+
+      - name: Deploy via SSH/SCP
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.ALIYUN_HOST }}
+          port: ${{ secrets.ALIYUN_PORT || '22' }}
+          username: ${{ secrets.ALIYUN_USER }}
+          password: ${{ secrets.ALIYUN_PASSWORD }}
+          # 如果使用密钥登录，取消下面这行注释，注释掉 password 行
+          # key: ${{ secrets.ALIYUN_SSH_KEY }}
+          source: "dist/*"
+          target: ${{ secrets.ALIYUN_DEPLOY_PATH || '/www/wwwroot/xytech' }}
+          strip_components: 1
+          overwrite: true
+          rm: true
+
+      - name: Notify success
+        if: success()
+        run: echo "✅ Deployed successfully to ${{ secrets.ALIYUN_HOST }}"

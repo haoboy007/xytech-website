@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>业务领域 - 雄元科技</title>
+  <meta name="description" content="雄元科技的四大业务领域：环保能源科技、AI人工智能应用、生命科学、元宇宙与VR技术">
+  <link rel="stylesheet" href="css/style.css">
+  <!-- 引入字体图标 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* 业务领域页面特定样式 */
+    .business-hero {
+      height: 50vh;
+      background: linear-gradient(135deg, rgba(0, 102, 204, 0.9), rgba(0, 170, 255, 0.8)), url('../images/logo.jpg');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      color: var(--light-text);
+      position: relative;
+      margin-top: 80px;
+    }
+    
+    .business-detail {
+      padding: 5rem 0;
+    }
+    
+    .business-detail:nth-child(even) {
+      background-color: var(--bg-color);
+    }
+    
+    .business-detail-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    
+    .business-detail-image {
+      overflow: hidden;
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+    
+    .business-detail-image img {
+      width: 100%;
+      height: auto;
+      transition: var(--transition);
+    }
+    
+    .business-detail-image:hover img {
+      transform: scale(1.05);
+    }
+    
+    .business-detail-text h3 {
+      color: var(--primary-color);
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+    }
+    
+    .business-features {
+      margin-top: 2rem;
+    }
+    
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 1.5rem;
+    }
+    
+    .feature-icon {
+      color: var(--primary-color);
+      font-size: 1.5rem;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+    
+    .business-cta {
+      margin-top: 2rem;
+    }
+    
+    .business-nav {
+      background-color: #fff;
+      padding: 1rem 0;
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 80px;
+      z-index: 100;
+    }
+    
+    .business-nav-list {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+      gap: 2rem;
+    }
+    
+    .business-nav-item a {
+      color: var(--text-color);
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      transition: var(--transition);
+    }
+    
+    .business-nav-item a:hover,
+    .business-nav-item a.active {
+      background-color: var(--primary-color);
+      color: var(--light-text);
+    }
+    
+    @media (max-width: 768px) {
+      .business-detail-content {
+        grid-template-columns: 1fr;
+      }
+      
+      .business-detail-image {
+        order: 1;
+      }
+      
+      .business-detail-text {
+        order: 2;
+      }
+      
+      .business-nav-list {
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- 头部导航 -->
+  <header class="header">
+    <div class="container">
+      <nav class="navbar">
+        <div class="logo">
+          <img src="images/logo.jpg" alt="雄元科技logo">
+          <div class="logo-text">雄元科技</div>
+        </div>
+        
+        <button class="mobile-toggle">
+          <i class="fas fa-bars"></i>
+        </button>
+        
+        <ul class="nav-menu">
+          <li class="nav-item"><a href="index.html" class="nav-link">首页</a></li>
+          <li class="nav-item"><a href="about.html" class="nav-link">关于我们</a></li>
+          <li class="nav-item"><a href="business.html" class="nav-link active">业务领域</a></li>
+          <li class="nav-item"><a href="contact.html" class="nav-link">联系我们</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 业务领域英雄区域 -->
+  <section class="business-hero">
+    <div class="container">
+      <div class="hero-content fade-in">
+        <h1 class="hero-title">业务领域</h1>
+        <p class="hero-subtitle">雄元科技专注于四大业务领域的科技创新与应用</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 业务导航 -->
+  <div class="business-nav">
+    <div class="container">
+      <ul class="business-nav-list">
+        <li class="business-nav-item"><a href="#energy" class="active">环保能源科技</a></li>
+        <li class="business-nav-item"><a href="#ai">AI人工智能应用</a></li>
+        <li class="business-nav-item"><a href="#life">生命科学</a></li>
+        <li class="business-nav-item"><a href="#vr">元宇宙与VR技术</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 环保能源科技 -->
+  <section id="energy" class="business-detail">
+    <div class="container">
+      <div class="business-detail-content">
+        <div class="business-detail-text fade-in">
+          <h3>环保能源科技</h3>
+          <p>中国雄元集团在环保能源领域的业务主要围绕绿色低碳发展、生态环保项目和能源技术创新展开，致力于为地方提供绿色低碳循环高质量可持续发展综合解决方案，成为地方政府绿色发展引擎。</p>
+          
+          <div class="business-features">
+            <div class="feature-item">
+              <div class="feature-icon">
+                <i class="fas fa-leaf"></i>
+              </div>
+              <div>
+                <h4>绿色低碳发展</h4>
+                <p>提供绿色低碳循环高质量可持续发展综合解决方案，助力企业和政府实现碳中和目标。</p>
+              </div>
+            </div>
+            
+            <div class="feature-item">
+              <div class="feature-icon">
+                <i class="fas fa-recycle"></i>
+              </div>
+              <div>
+                <h4>生态环保项目</h4>
+                <p>开展固废能源项目、生态农业项目等，推动资源循环利用和环境保护。</p>
+              </div>
+            </div>
+            
+            <div class="feature-item">
+              <div class="feature-icon">
+                <i class="fas fa-lightbulb"></i>
+              </div>
+              <div>
+                <h4>能源技术创新</h4>
+                <p>推动生态能源技术研发与应用，探索清洁能源新模式。</p>
+              </div>
+            </div>
+            
+            <div class="feature-item">
+              <div class="feature-icon">
+                <i class="fas fa-home"></i>
+              </div>
+              <div>
+                <h4>区域发展模式</h4>
+                <p>推广"生态小站+"模式，建设"一个俱乐部三个中心"（一个雄企汇青年俱乐部，乡村振兴中心、科技孵化中心、生态社区综合服务中心）。</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="business-cta">
+            <a href="contact.html" class="btn">咨询合作</a>
+          </div>
+        </div>
+        
+        <div class="business-detail-image fade-in delay-1">
+          <img src="images/energy.jpg" alt="环保能源科技">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI人工智能应用 -->
+  <section id="ai" class="business-detail">
+    <div class="container">
+      <div class="business-detail-content">
+        <div class="business-detail-image fade-in">
+          <img src="images/ai.jpg" alt="AI人工智能应用">
+        </div>
+        
+        <div class="business-detail-text fade-in delay-1">
+          <h3>AI人工智能应用</h3>
+          <p>雄安兴元科技有限公司在AI人工智能领域的业务主要围绕兴言AI数字人开发平台展开，致力于为各行业提供智能化解决方案和数字人服务。</p>
+          
+          <div class="business-features">
+            <div class="feature-item">
+              <div class="feature-icon">
+                <i class="fas fa-robot"></i>
+              </div>
+              <div>
+                <h4>兴言AI数字人开发平台</h4>
+                <p>自主研发的AIGC数字人开发平台，已接入DeepSeek大模型，并支持私有化部署，具有完全本地化运行的底层大模型。</p>
+              </div>
+            </div>
+            
+            <div class="feature-item">
+              <div class="feature-icon">
+                <i class="fas fa-tv"></i>
+              </div>
+              <div>
+                <h4>数字人应用案例</h4>
+                <p>已成功开发央视主持人"AI海灵"、"AI虚拟医生小安和护士小新"等，在雄安展区担任"知识考官"和"数字讲解员"。</p>
+              </div>
+            </div>
+            
+            <div class="feature-item">
+              <div class="feature-icon">
+                <i class="fas fa-comments"></i>
+              </div>
+              <div>
+                <h4>AI技术应用</h4>
+                <p>基于自然语言处理(NLP)和多模态交互技术，结合大规模语料训练，实现高质量的虚拟讲解员，支持多轮对话和场景理解。</p>
+              </div>
+            </div>
+            
+            <div class="feature-item">
+              <div class="feature-icon">
+                <i class="fas fa-server"></i>
+              </div>
+              <div>
+                <h4>私有化部署</h4>
+                <p>支持大模型的私有化部署，保障数据安全和隐私保护，满足企业级应用需求。</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="business-cta">
+            <a href="contact.html" class="btn">咨询合作</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 生命科学 -->
+  <section id="life" class="business-detail">
+    <div class="container">
+      <div class="business-detail-content">
+        <div class="business-detail-text fade-in">
+          <h3>生命科学</h3>
+          <p>雄元科技在生命科学领域的业务主要围绕现代生命科学和生物技术产业发展展开，与医疗健康领域深度合作，推动AI技术在医疗健康领域的创新应用。</p>
+          
+          <div class="business-features">
+            <div class="feature-item">
+              <div class="feature-icon">
+                <i class="fas fa-heartbeat"></i>
+              </div>
+              <div>
+                <h4>医疗健康应用</h4>
+                <p>与中国医师协会健康传播工作委员会联合打造"AI虚拟医生小安和护士小新"，展现AI技术在医疗健康领域的应用。</p>
+              </div>
+            </div>
+            
+            <div class="feature-item">
+              <div class="feature-icon">
+                <i class="fas fa-microscope"></i>
+              </div>
+              <div>
+                <h4>生物技术研发</h4>
+                <p>专注于现代生命科学和生物技术产业发展，推动生物技术创新和应用。</p>
+              </div>
+            </div>
+            
+            <div class="feature-item">
+              <div class="feature-icon">
+                <i class="fas fa-handshake"></i>
+              </div>
+              <div>
+                <h4>合作案例</h4>
+                <p>与雄安妙心生物科技有限公司合作，为其打造AI数字人，助力生物科技领域的智能化转型。</p>
+              </div>
+            </div>
+            
+            <div class="feature-item">
+              <div class="feature-icon">
+                <i class="fas fa-file-medical"></i>
+              </div>
+              <div>
+                <h4>政策支持</h4>
+                <p>依托雄安新区《关于支持现代生命科学和生物技术产业发展的若干措施（试行）》，为企业提供良好的发展环境。</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="business-cta">
+            <a href="contact.html" class="btn">咨询合作</a>
+          </div>
+        </div>
+        
+        <div class="business-detail-image fade-in delay-1">
+          <img src="images/life.jpg" alt="生命科学">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 元宇宙与VR技术 -->
+  <section id="vr" class="business-detail">
+    <div class="container">
+      <div class="business-detail-content">
+        <div class="business-detail-image fade-in">
+          <img src="images/vr.jpg" alt="元宇宙与VR技术">
+        </div>
+        
+        <div class="business-detail-text fade-in delay-1">
+          <h3>元宇宙与VR技术</h3>
+          <p>雄元科技在元宇宙与VR技术领域的业务主要围绕兴展元宇宙项目开发平台和兴境VR大空间沉浸式开发平台展开，为文旅、教育、金融、工业、消费等多个领域提供前沿的科技解决方案。</p>
+          
+          <div class="business-features">
+            <div class="feature-item">
+              <div class="feature-icon">
+                <i class="fas fa-vr-cardboard"></i>
+              </div>
+              <div>
+                <h4>兴展元宇宙项目开发平台</h4>
+                <p>专注于元宇宙、区块链、空间计算等技术研发，为合作伙伴提供前沿的科技解决方案，业务涵盖文旅、教育、金融、工业、消费等多个领域。</p>
+              </div>
+            </div>
+            
+            <div class="feature-item">
+              <div class="feature-icon">
+                <i class="fas fa-cube"></i>
+              </div>
+              <div>
+                <h4>兴境VR大空间沉浸式开发平台</h4>
+                <p>集技术创新、资源共享和社区互动于一体的综合性平台，为VR内容创作者和开发者提供高效、便捷、富有创造力的开发环境。</p>
+              </div>
+            </div>
+            
+            <div class="feature-item">
+              <div class="feature-icon">
+                <i class="fas fa-gamepad"></i>
+              </div>
+              <div>
+                <h4>VR大空间沉浸式项目</h4>
+                <p>已成功开发《重回山海》《独行月球》《消失的校花》《古宅》等VR大空间沉浸式项目，相比传统VR游戏和体验具有更大的场景、更高的自由度和更强的沉浸感。</p>
+              </div>
+            </div>
+            
+            <div class="feature-item">
+              <div class="feature-icon">
+                <i class="fas fa-medal"></i>
+              </div>
+              <div>
+                <h4>荣誉成就</h4>
+                <p>"兴元兴境VR大空间沉浸式开发平台项目"入选ARinChina 2024XR行业年度荣誉榜——LBE大空间内容榜单。</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="business-cta">
+            <a href="contact.html" class="btn">咨询合作</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>雄元科技</h4>
+          <p>专注于环保能源科技、AI人工智能应用、生命科学、元宇宙与VR技术领域的科技创新与应用。</p>
+        </div>
+        
+        <div class="footer-col">
+          <h4>快速链接</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">首页</a></li>
+            <li><a href="about.html">关于我们</a></li>
+            <li><a href="business.html">业务领域</a></li>
+            <li><a href="contact.html">联系我们</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-col">
+          <h4>业务领域</h4>
+          <ul class="footer-links">
+            <li><a href="#energy">环保能源科技</a></li>
+            <li><a href="#ai">AI人工智能应用</a></li>
+            <li><a href="#life">生命科学</a></li>
+            <li><a href="#vr">元宇宙与VR技术</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-col">
+          <h4>联系方式</h4>
+          <p>地址：中国（河北）自由贸易试验区雄安片区华望城丰华谷B1楼7层703C-3</p>
+          <p>电话：19898989369</p>
+          <p>邮箱：xionganxy@163.com</p>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2025 雄元科技 版权所有</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="js/script.js"></script>
+  <script>
+    // 业务导航高亮
+    document.addEventListener('DOMContentLoaded', () => {
+      const navLinks = document.querySelectorAll('.business-nav-item a');
+      const sections = document.querySelectorAll('.business-detail');
+      
+      function setActiveNavItem() {
+        const scrollPosition = window.scrollY + 200;
+        
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.offsetHeight;
+          const sectionId = section.getAttribute('id');
+          
+          if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+            navLinks.forEach(link => {
+              link.classList.remove('active');
+              if (link.getAttribute('href') === `#${sectionId}`) {
+                link.classList.add('active');
+              }
+            });
+          }
+        });
+      }
+      
+      window.addEventListener('scroll', setActiveNavItem);
+      
+      // 点击导航平滑滚动
+      navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          const targetId = this.getAttribute('href');
+          const targetSection = document.querySelector(targetId);
+          
+          if (targetSection) {
+            const offsetTop = targetSection.offsetTop - 150;
+            window.scrollTo({
+              top: offsetTop,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

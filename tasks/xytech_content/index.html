@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>雄元科技 - 科技创新与应用</title>
+  <meta name="description" content="雄元科技专注于环保能源科技、AI人工智能应用、生命科学等领域的科技创新与应用">
+  <link rel="stylesheet" href="css/style.css">
+  <!-- 引入字体图标 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <!-- 头部导航 -->
+  <header class="header">
+    <div class="container">
+      <nav class="navbar">
+        <div class="logo">
+          <img src="logo.png" alt="雄元科技logo">
+          <div class="logo-text"> </div>
+        </div>
+        
+        <button class="mobile-toggle">
+          <i class="fas fa-bars"></i>
+        </button>
+        
+        <ul class="nav-menu">
+          <li class="nav-item"><a href="#home" class="nav-link active">首页</a></li>
+          <li class="nav-item"><a href="#about" class="nav-link">关于我们</a></li>
+          <li class="nav-item"><a href="#business" class="nav-link">业务领域</a></li>
+          <li class="nav-item"><a href="#contact" class="nav-link">联系我们</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 首页英雄区域 -->
+  <section id="home" class="hero">
+    <div class="container">
+      <div class="hero-content fade-in">
+        <h1 class="hero-title">科技创新引领未来</h1>
+        <p class="hero-subtitle">雄元科技专注于环保能源科技、AI人工智能应用、生命科学等领域的科技创新与应用</p>
+        <div class="hero-btns">
+          <a href="#business" class="btn">了解业务</a>
+          <a href="#contact" class="btn btn-outline">联系我们</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 关于我们 -->
+  <section id="about" class="about section">
+    <div class="container">
+      <h2 class="section-title">关于我们</h2>
+      
+      <div class="about-content">
+        <div class="about-text fade-in">
+          <p>雄元科技是中国雄元集团有限公司旗下科技平台，起源于2006年春夏之交，前身为中国齐鲁创服集团有限公司（正式成立于2015年5月），于2022年6月改名为中国雄元集团有限公司。</p>
+          <p>我们的核心团队先后从事汽车设计生产制造、网络培训、房地产开发、管理咨询、生态环保、生态能源、知识付费、科技研发等多行业领域，所管理、服务项目遍布全国二十余个省份，积累了大量跨行业资源和企业管理经验。</p>
+          <p></p>
+        </div>
+        
+        <div class="about-image fade-in delay-1">
+          <img src="images/logo.jpg" alt="雄元科技公司形象">
+        </div>
+      </div>
+      
+      <div class="mission-vision">
+        <div class="mission-vision-grid">
+          <div class="mission-box fade-in delay-2">
+            <h3 class="box-title">我们的使命</h3>
+            <ul>
+              <li>响应"青年强则国家强"号召，致力做全球青年四创四新综合服务平台</li>
+              <li>为地方提供绿色低碳循环高质量可持续发展综合解决方案</li>
+              <li>共建清洁美丽世界，促进人与自然和谐共生</li>
+            </ul>
+          </div>
+          
+          <div class="vision-box fade-in delay-3">
+            <h3 class="box-title">我们的愿景</h3>
+            <p>"国之未来，雄元所向"</p>
+            <p>国家的需要，国家的未来，就是雄元努力奋斗的方向</p>
+            <p>核心理念："创新引领 稳健发展"</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 业务领域 -->
+  <section id="business" class="business section">
+    <div class="container">
+      <h2 class="section-title">业务领域</h2>
+      
+      <div class="business-grid">
+        <!-- 环保能源科技 -->
+        <div class="business-card fade-in" data-id="1">
+          <div class="business-image">
+            <img src="images/energy.jpg" alt="环保能源科技">
+          </div>
+          <div class="business-content">
+            <h3 class="business-title">环保能源科技</h3>
+            <p class="business-desc">开发软硬结合光伏支架、可溯源原料收储运管理系统、AI辅助售电决策系统等应用，为工业园区提供绿色低碳循环高质量可持续发展综合解决方案。</p>
+            <a href="javascript:showBusinessDetail(1)" class="btn">了解更多</a>
+          </div>
+        </div>
+        
+        <!-- AI人工智能应用 -->
+        <div class="business-card fade-in delay-1" data-id="2">
+          <div class="business-image">
+            <img src="images/ai.jpg" alt="AI人工智能应用">
+          </div>
+          <div class="business-content">
+            <h3 class="business-title">AI人工智能应用</h3>
+            <p class="business-desc">利用AI编程软件，开发雄企群英荟、巾帼蜜友荟、我的疗愈坊、公众号文章转PDF等web网页程序、微信小程序，将AI技术接入雄启识慧云上智库系统。</p>
+            <a href="#" class="btn">了解更多</a>
+          </div>
+        </div>
+        
+        <!-- 生命科学 -->
+        <div class="business-card fade-in delay-2" data-id="3">
+          <div class="business-image">
+            <img src="images/life.jpg" alt="生命科学">
+          </div>
+          <div class="business-content">
+            <h3 class="business-title">生命科学</h3>
+            <p class="business-desc">专注于抗衰老机制研究及药物研发等现代生命科学和生物技术产业发展，与高等院校科技园所深度合作。</p>
+            <a href="javascript:showBusinessDetail(3)" class="btn">了解更多</a>
+          </div>
+        </div>
+        
+        <!-- 元宇宙与VR技术 -->
+        <div class="business-card fade-in delay-3" data-id="4">
+          <div class="business-image">
+            <img src="images/vr.jpg" alt="硬科技">
+          </div>
+          <div class="business-content">
+            <h3 class="business-title">高新硬科技</h3>
+            <p class="business-desc">研发智能仿真宠物，密切跟踪具身机器人、低空经济等多个领域高新硬科技。</p>
+            <a href="javascript:showBusinessDetail(4)" class="btn">了解更多</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 联系我们 -->
+  <section id="contact" class="contact section">
+    <div class="container">
+      <h2 class="section-title">联系我们</h2>
+      
+      <div class="contact-container">
+        <div class="contact-info fade-in">
+          <h3>联系方式</h3>
+          
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div>
+              <h4>地址</h4>
+              <p>北京市西城区广义路华星大厦</p>
+            </div>
+          </div>
+          
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fas fa-phone"></i>
+            </div>
+            <div>
+              <h4>电话</h4>
+              <p>18301592576</p>
+            </div>
+          </div>
+          
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div>
+              <h4>电子邮箱</h4>
+              <p>mbazone@qq.com</p>
+            </div>
+          </div>
+          
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fas fa-building"></i>
+            </div>
+            <div>
+              <h4>办事处</h4>
+              <p>北京、济南、廊坊等地</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="contact-form fade-in delay-1">
+          <h3>留言咨询</h3>
+          <form id="contactForm">
+            <div class="form-group">
+              <label for="name" class="form-label">姓名</label>
+              <input type="text" id="name" class="form-control" placeholder="请输入您的姓名">
+            </div>
+            
+            <div class="form-group">
+              <label for="email" class="form-label">电子邮箱</label>
+              <input type="email" id="email" class="form-control" placeholder="请输入您的电子邮箱">
+            </div>
+            
+            <div class="form-group">
+              <label for="phone" class="form-label">电话</label>
+              <input type="tel" id="phone" class="form-control" placeholder="请输入您的电话">
+            </div>
+            
+            <div class="form-group">
+              <label for="subject" class="form-label">主题</label>
+              <input type="text" id="subject" class="form-control" placeholder="请输入咨询主题">
+            </div>
+            
+            <div class="form-group">
+              <label for="message" class="form-label">留言内容</label>
+              <textarea id="message" class="form-control" placeholder="请输入您的留言内容"></textarea>
+            </div>
+            
+            <div id="formMessage" class="form-message" style="display: none;"></div>
+            
+            <button type="submit" class="btn">提交</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>雄元科技</h4>
+          <p>专注于环保能源科技、AI人工智能应用、生命科学等领域的科技创新与应用。</p>
+        </div>
+        
+        <div class="footer-col">
+          <h4>快速链接</h4>
+          <ul class="footer-links">
+            <li><a href="#home">首页</a></li>
+            <li><a href="#about">关于我们</a></li>
+            <li><a href="#business">业务领域</a></li>
+            <li><a href="#contact">联系我们</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-col">
+          <h4>业务领域</h4>
+          <ul class="footer-links">
+            <li><a href="javascript:showBusinessDetail(1)">环保能源科技</a></li>
+            <li><a href="javascript:showBusinessDetail(2)">AI人工智能应用</a></li>
+            <li><a href="javascript:showBusinessDetail(3)">生命科学</a></li>
+            <li><a href="javascript:showBusinessDetail(4)">高新硬科技</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-col">
+          <h4>合作伙伴</h4>
+          <p>已与雄元集团、旺赢咨询等百余家企业建立深入合作。</p>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2025 雄元科技 版权所有 <span class="y"><a href="https://beian.miit.gov.cn/" rel="nofollow" target="_blank">京ICP备2024080932号-3</a></span></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="js/script.js"></script>
+</body>
+</html>

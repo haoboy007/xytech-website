@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>关于我们 - 雄元科技</title>
+  <meta name="description" content="了解雄元科技的企业背景、使命愿景、发展历程和企业文化">
+  <link rel="stylesheet" href="css/style.css">
+  <!-- 引入字体图标 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* 关于我们页面特定样式 */
+    .about-hero {
+      height: 50vh;
+      background: linear-gradient(135deg, rgba(0, 102, 204, 0.9), rgba(0, 170, 255, 0.8)), url('../images/logo.jpg');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      color: var(--light-text);
+      position: relative;
+      margin-top: 80px;
+    }
+    
+    .timeline {
+      position: relative;
+      max-width: 800px;
+      margin: 3rem auto;
+    }
+    
+    .timeline::after {
+      content: '';
+      position: absolute;
+      width: 4px;
+      background-color: var(--primary-color);
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      margin-left: -2px;
+    }
+    
+    .timeline-item {
+      padding: 10px 40px;
+      position: relative;
+      width: 50%;
+      box-sizing: border-box;
+    }
+    
+    .timeline-item::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: #fff;
+      border: 4px solid var(--primary-color);
+      border-radius: 50%;
+      top: 15px;
+      z-index: 1;
+    }
+    
+    .left {
+      left: 0;
+    }
+    
+    .right {
+      left: 50%;
+    }
+    
+    .left::after {
+      right: -10px;
+    }
+    
+    .right::after {
+      left: -10px;
+    }
+    
+    .timeline-content {
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+    
+    .timeline-content h3 {
+      color: var(--primary-color);
+      margin-bottom: 0.5rem;
+    }
+    
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    
+    .team-member {
+      background-color: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      text-align: center;
+      transition: var(--transition);
+    }
+    
+    .team-member:hover {
+      transform: translateY(-10px);
+    }
+    
+    .team-photo {
+      height: 200px;
+      overflow: hidden;
+    }
+    
+    .team-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .team-info {
+      padding: 1.5rem;
+    }
+    
+    .team-name {
+      color: var(--dark-text);
+      margin-bottom: 0.5rem;
+    }
+    
+    .team-position {
+      color: var(--primary-color);
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+    
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    
+    .value-card {
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 2rem;
+      box-shadow: var(--shadow);
+      text-align: center;
+      transition: var(--transition);
+    }
+    
+    .value-card:hover {
+      transform: translateY(-10px);
+    }
+    
+    .value-icon {
+      font-size: 3rem;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+    }
+    
+    .value-title {
+      color: var(--dark-text);
+      margin-bottom: 1rem;
+    }
+    
+    @media (max-width: 768px) {
+      .timeline::after {
+        left: 31px;
+      }
+      
+      .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+      }
+      
+      .timeline-item::after {
+        left: 21px;
+      }
+      
+      .left::after, .right::after {
+        left: 21px;
+      }
+      
+      .right {
+        left: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- 头部导航 -->
+  <header class="header">
+    <div class="container">
+      <nav class="navbar">
+        <div class="logo">
+          <img src="images/logo.jpg" alt="雄元科技logo">
+          <div class="logo-text">雄元科技</div>
+        </div>
+        
+        <button class="mobile-toggle">
+          <i class="fas fa-bars"></i>
+        </button>
+        
+        <ul class="nav-menu">
+          <li class="nav-item"><a href="index.html" class="nav-link">首页</a></li>
+          <li class="nav-item"><a href="about.html" class="nav-link active">关于我们</a></li>
+          <li class="nav-item"><a href="business.html" class="nav-link">业务领域</a></li>
+          <li class="nav-item"><a href="contact.html" class="nav-link">联系我们</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 关于我们英雄区域 -->
+  <section class="about-hero">
+    <div class="container">
+      <div class="hero-content fade-in">
+        <h1 class="hero-title">关于我们</h1>
+        <p class="hero-subtitle">了解雄元科技的企业背景、使命愿景、发展历程和企业文化</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 企业背景 -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">企业背景</h2>
+      
+      <div class="about-content">
+        <div class="about-text fade-in">
+          <h3>中国雄元集团有限公司</h3>
+          <p>雄元科技是中国雄元集团有限公司旗下科技平台，起源于2006年春夏之交，前身为中国齐鲁创服集团有限公司（正式成立于2015年5月），于2022年6月改名为中国雄元集团有限公司。</p>
+          <p>核心团队先后从事汽车设计生产制造、网络培训、房地产开发、管理咨询、生态环保、生态能源、知识付费、科技研发等多行业领域，所管理、服务项目遍布全国二十余个省份，积累了大量跨行业资源和企业管理经验。</p>
+          
+          <h3>雄安兴元科技有限公司</h3>
+          <p>雄安兴元科技有限公司是一家位于中国雄安的高科技企业，成立于2024年4月1日，注册资本300万元，法定代表人为巩文通（创始人兼CEO）。</p>
+          <p>公司拥有一支80+人的技术研发团队，在北京、济南、威海、青岛、烟台等地设立办事处。已与包括华为、腾讯、中国移动、中国银行、中国中央电视台、雄安文旅等巨头在内的百余家企业建立了深入合作，共同布局并推动科技创新领域的发展。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 使命愿景 -->
+  <section class="section bg-light">
+    <div class="container">
+      <h2 class="section-title">使命与愿景</h2>
+      
+      <div class="mission-vision">
+        <div class="mission-vision-grid">
+          <div class="mission-box fade-in">
+            <h3 class="box-title">我们的使命</h3>
+            <ul>
+              <li>响应"青年强则国家强"号召，致力做全球青年四创四新综合服务平台</li>
+              <li>为地方提供绿色低碳循环高质量可持续发展综合解决方案，致力成为地方政府绿色发展引擎</li>
+              <li>共建清洁美丽世界，促进人与自然和谐共生</li>
+            </ul>
+          </div>
+          
+          <div class="vision-box fade-in delay-1">
+            <h3 class="box-title">我们的愿景</h3>
+            <p>"成为全球科技创新引领者，做用户心中最信赖的朋友"</p>
+            <p>"国之未来，雄元所向"——国家的需要，国家的未来，就是雄元努力奋斗的方向</p>
+            <p>核心理念："稳中求进，行稳致远"</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 发展历程 -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">发展历程</h2>
+      
+      <div class="timeline">
+        <div class="timeline-item left fade-in">
+          <div class="timeline-content">
+            <h3>2006年</h3>
+            <p>雄元科技的前身在春夏之交成立，开始探索科技创新领域</p>
+          </div>
+        </div>
+        
+        <div class="timeline-item right fade-in delay-1">
+          <div class="timeline-content">
+            <h3>2015年5月</h3>
+            <p>中国齐鲁创服集团有限公司正式成立，开始多行业布局</p>
+          </div>
+        </div>
+        
+        <div class="timeline-item left fade-in delay-2">
+          <div class="timeline-content">
+            <h3>2022年6月</h3>
+            <p>更名为中国雄元集团有限公司，进一步聚焦科技创新领域</p>
+          </div>
+        </div>
+        
+        <div class="timeline-item right fade-in delay-3">
+          <div class="timeline-content">
+            <h3>2024年4月</h3>
+            <p>雄安兴元科技有限公司成立，专注于AI、元宇宙等前沿技术研发</p>
+          </div>
+        </div>
+        
+        <div class="timeline-item left fade-in delay-4">
+          <div class="timeline-content">
+            <h3>2024年至今</h3>
+            <p>与百余家企业建立深入合作，推出多款创新产品和解决方案</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 企业文化 -->
+  <section class="section bg-light">
+    <div class="container">
+      <h2 class="section-title">企业文化</h2>
+      
+      <div class="values-grid">
+        <div class="value-card fade-in">
+          <div class="value-icon">
+            <i class="fas fa-lightbulb"></i>
+          </div>
+          <h3 class="value-title">创新驱动</h3>
+          <p>不断探索前沿科技，以创新思维推动行业发展，引领科技变革</p>
+        </div>
+        
+        <div class="value-card fade-in delay-1">
+          <div class="value-icon">
+            <i class="fas fa-handshake"></i>
+          </div>
+          <h3 class="value-title">合作共赢</h3>
+          <p>与合作伙伴建立长期稳定的合作关系，共同创造价值，实现互利共赢</p>
+        </div>
+        
+        <div class="value-card fade-in delay-2">
+          <div class="value-icon">
+            <i class="fas fa-leaf"></i>
+          </div>
+          <h3 class="value-title">绿色发展</h3>
+          <p>坚持可持续发展理念，推动绿色低碳循环经济，促进人与自然和谐共生</p>
+        </div>
+        
+        <div class="value-card fade-in delay-3">
+          <div class="value-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <h3 class="value-title">人才至上</h3>
+          <p>尊重人才，培养人才，为员工提供广阔的发展平台和成长空间</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 智库平台 -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">智库平台</h2>
+      
+      <div class="about-content">
+        <div class="about-text fade-in">
+          <p>中国雄元集团打造的"雄QI汇"系列智库平台：</p>
+          
+          <h3>雄企汇/雄企群英荟</h3>
+          <p>以"汇聚、启迪、协同、发展"理念为纽带，持续开展"私董会"、"云访谈"、"思享荟"、专题研讨会等活动</p>
+          
+          <h3>雄启汇/雄启汇科创智库/雄启汇商学院</h3>
+          <p>通过启迪启发、产业行业研究、科技孵化、技术研发、成果转化，促进产业加速、科技转化为生产力</p>
+          
+          <h3>雄起汇/云上万里行/雄起东方</h3>
+          <p>不断实现产业集群创新，不断补强、补全产业链</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 荣誉与成就 -->
+  <section class="section bg-light">
+    <div class="container">
+      <h2 class="section-title">荣誉与成就</h2>
+      
+      <div class="about-content">
+        <div class="about-text fade-in">
+          <ul>
+            <li>雄安兴元科技的"兴元兴境VR大空间沉浸式开发平台项目"入选ARinChina 2024XR行业年度荣誉榜——LBE大空间内容榜单</li>
+            <li>公司创始人巩文通受邀参与拍摄京津冀协同发展11周年专题纪录片《同心向新》并在北京卫视和北京财经频道黄金档播出</li>
+            <li>巩文通正式加入天津卫视《非你莫属》B团成员</li>
+            <li>已成功开发《重回山海》《独行月球》《消失的校花》《古宅》等VR大空间沉浸式项目</li>
+            <li>与中国医师协会健康传播工作委员会联合打造"AI虚拟医生小安和护士小新"</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>雄元科技</h4>
+          <p>专注于环保能源科技、AI人工智能应用、生命科学、元宇宙与VR技术领域的科技创新与应用。</p>
+        </div>
+        
+        <div class="footer-col">
+          <h4>快速链接</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">首页</a></li>
+            <li><a href="about.html">关于我们</a></li>
+            <li><a href="business.html">业务领域</a></li>
+            <li><a href="contact.html">联系我们</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-col">
+          <h4>业务领域</h4>
+          <ul class="footer-links">
+            <li><a href="business.html#energy">环保能源科技</a></li>
+            <li><a href="business.html#ai">AI人工智能应用</a></li>
+            <li><a href="business.html#life">生命科学</a></li>
+            <li><a href="business.html#vr">元宇宙与VR技术</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-col">
+          <h4>联系方式</h4>
+          <p>地址：中国（河北）自由贸易试验区雄安片区华望城丰华谷B1楼7层703C-3</p>
+          <p>电话：19898989369</p>
+          <p>邮箱：xionganxy@163.com</p>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2025 雄元科技 版权所有</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="js/script.js"></script>
+</body>
+</html>

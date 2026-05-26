@@ -1,0 +1,125 @@
+{
+  "skill_name": "community-platform-dev",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "帮我做一个校友会小程序，需要校友注册、发布动态、组织线下活动、积分签到功能。校友可以发布合作需求，管理员能审核内容。",
+      "expected_output": "应触发 community-platform-dev 技能，提供完整的数据库设计、前端架构、校友认证、活动管理、积分系统、管理后台等端到端方案",
+      "should_trigger": true
+    },
+    {
+      "id": 2,
+      "prompt": "想做一个同乡会平台，让海外山东人能够发帖交流、组织聚会、发布商业合作信息。要有实名认证，区分个人认证和企业认证。还需要一个管理后台审核帖子。",
+      "expected_output": "应触发 community-platform-dev 技能，涵盖同乡社交平台的核心模块：用户认证、帖子动态、活动报名、商业合作、管理后台审核",
+      "should_trigger": true
+    },
+    {
+      "id": 3,
+      "prompt": "我们公司要做一个行业协会的会员管理系统，会员可以发布供求信息、参加活动、积分兑换礼品。后台需要统计报表和审核功能。",
+      "expected_output": "应触发 community-platform-dev 技能，提供会员系统、供求对接、活动管理、积分商城、后台统计等方案",
+      "should_trigger": true
+    },
+    {
+      "id": 4,
+      "prompt": "只需要一个积分签到系统，每天签到赚积分，积分可以换东西。要连续签到奖励和排行榜。",
+      "expected_output": "应触发 community-platform-dev 技能（积分系统子模块），提供签到算法、积分商城、排行榜、防刷机制的完整设计",
+      "should_trigger": true
+    },
+    {
+      "id": 5,
+      "prompt": "帮我设计一个活动报名系统的数据库表，包括活动表、报名表、签到表，支持活动发布、用户报名、现场签到。",
+      "expected_output": "应触发 community-platform-dev 技能（活动系统子模块），提供 events/event_registrations/event_checkins 的完整表设计和 Edge Function 签到验证方案",
+      "should_trigger": true
+    },
+    {
+      "id": 6,
+      "prompt": "想做一个带有私信聊天功能的社区平台，用户可以发帖子、评论、点赞，还可以私信聊天。需要消息列表和未读提醒。",
+      "expected_output": "应触发 community-platform-dev 技能，提供帖子动态、评论点赞、messages表设计、get_conversations RPC、未读计数等方案",
+      "should_trigger": true
+    },
+    {
+      "id": 7,
+      "prompt": "做一个商会平台，企业可以入驻展示、发布融资需求、发布并购意向。管理员可以审核企业信息和融资项目。",
+      "expected_output": "应触发 community-platform-dev 技能（商业合作模块），提供企业名录、融资路演、并购投资、后台审核的完整方案",
+      "should_trigger": true
+    },
+    {
+      "id": 8,
+      "prompt": "需要一个管理后台，能审核用户提交的认证申请（身份证、营业执照），查看统计数据，管理积分订单发货退款。",
+      "expected_output": "应触发 community-platform-dev 技能（管理后台模块），提供认证审核面板、统计卡片、积分订单管理、发货退款流程的方案",
+      "should_trigger": true
+    },
+    {
+      "id": 9,
+      "prompt": "做一个宗亲联谊会的小程序，族人可以查找族谱、发布家族动态、组织祭祖活动。要有家族树展示和辈分排序。",
+      "expected_output": "应触发 community-platform-dev 技能（社交平台基础模块），提供用户系统、帖子动态、活动管理的方案。族谱/家族树功能可能需要额外扩展",
+      "should_trigger": true
+    },
+    {
+      "id": 10,
+      "prompt": "我需要一个个人博客网站，可以写文章、分类标签、评论功能。用Next.js实现，需要SEO优化。",
+      "expected_output": "不应触发 community-platform-dev 技能。这是一个简单的个人博客（CMS），不需要社交关系、私信、活动、积分、商业合作等圈层平台特性",
+      "should_trigger": false
+    },
+    {
+      "id": 11,
+      "prompt": "做一个电商网站，要有商品列表、购物车、订单管理、支付功能。用户可以买商品，商家可以上架商品。",
+      "expected_output": "不应触发 community-platform-dev 技能。这是一个电商平台，核心是商品交易，不是圈层社交。应使用 payment-wechat 等技能",
+      "should_trigger": false
+    },
+    {
+      "id": 12,
+      "prompt": "开发一个在线教育系统，学生可以选课、看视频、做作业、参加考试。老师可以发布课程和批改作业。",
+      "expected_output": "不应触发 community-platform-dev 技能。这是在线教育平台（LMS），核心是课程管理和学习流程，不是圈层社交",
+      "should_trigger": false
+    },
+    {
+      "id": 13,
+      "prompt": "做一个预约系统，用户可以预约健身房课程、查看课程表、取消预约。教练可以发布课程安排。",
+      "expected_output": "不应触发 community-platform-dev 技能。虽然有"活动/预约"的表面相似性，但核心是时间预约管理，不是圈层社交平台。简单的预约系统不需要社交关系、帖子、私信、积分商城等",
+      "should_trigger": false
+    },
+    {
+      "id": 14,
+      "prompt": "帮我做一个简单的问卷收集工具，用户可以创建问卷、分享链接、查看统计结果。",
+      "expected_output": "不应触发 community-platform-dev 技能。这是问卷工具，与圈层社交无关",
+      "should_trigger": false
+    },
+    {
+      "id": 15,
+      "prompt": "做一个HR管理系统，包含员工信息、考勤打卡、请假审批、工资计算。",
+      "expected_output": "不应触发 community-platform-dev 技能。这是企业HR SaaS，不是圈层社交平台",
+      "should_trigger": false
+    },
+    {
+      "id": 16,
+      "prompt": "开发一个餐厅点餐小程序，顾客扫码点餐、下单支付，后厨接收订单。需要菜单管理和订单管理。",
+      "expected_output": "不应触发 community-platform-dev 技能。这是餐饮点餐系统（O2O），不是圈层社交平台",
+      "should_trigger": false
+    },
+    {
+      "id": 17,
+      "prompt": "做一个知识付费平台，创作者可以发布专栏文章、视频课程，用户订阅付费。支持评论和打赏。",
+      "expected_output": "不应触发 community-platform-dev 技能。这是内容付费平台，虽然有评论，但核心是付费订阅和内容消费，不是圈层社交。打赏≠积分系统",
+      "should_trigger": false
+    },
+    {
+      "id": 18,
+      "prompt": "做一个简单的文件管理系统，用户可以上传文件、创建文件夹、分享链接给别人下载。",
+      "expected_output": "不应触发 community-platform-dev 技能。这是网盘/文件管理工具，与圈层社交无关",
+      "should_trigger": false
+    },
+    {
+      "id": 19,
+      "prompt": "做一个企业内部的员工社区，员工可以发帖交流、组织团建活动、发布二手交易信息。需要实名认证区分部门。",
+      "expected_output": "应触发 community-platform-dev 技能（这是典型的圈层社交平台——企业内部社群），提供帖子动态、活动管理、实名认证、二手交易（可复用商机对接模式）的方案",
+      "should_trigger": true
+    },
+    {
+      "id": 20,
+      "prompt": "开发一个小区业主交流平台，业主可以发布通知、组织社区活动、报修物业问题、邻里互助。物业可以管理公告和报修工单。",
+      "expected_output": "应触发 community-platform-dev 技能（社区型圈层平台），提供帖子动态、活动管理、通知公告、报修工单（可复用管理后台模式）的完整方案",
+      "should_trigger": true
+    }
+  ]
+}
