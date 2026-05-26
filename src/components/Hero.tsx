@@ -21,6 +21,20 @@ function WaveFlow() {
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     const mouse = { x: -9999, y: -9999 };
 
+    // 颜色插值：baseColor → gold，t: 0~1
+    const interpolateToGold = (baseColor: string, t: number): string => {
+      // 解析 hex 颜色
+      const r1 = parseInt(baseColor.slice(1, 3), 16);
+      const g1 = parseInt(baseColor.slice(3, 5), 16);
+      const b1 = parseInt(baseColor.slice(5, 7), 16);
+      // 金色 #FFD700
+      const r2 = 255, g2 = 215, b2 = 0;
+      const r = Math.round(r1 + (r2 - r1) * t);
+      const g = Math.round(g1 + (g2 - g1) * t);
+      const b = Math.round(b1 + (b2 - b1) * t);
+      return `rgb(${r}, ${g}, ${b})`;
+    };
+
     // 波浪配置
     interface WaveLine {
       baseY: number;       // 基准Y位置
@@ -149,10 +163,11 @@ function WaveFlow() {
         const activeAlpha = wave.alpha + highlight * 0.55;
         const activeGlow = wave.glow + highlight * 28;
         const activeWidth = wave.width + highlight * 1.8;
+        const activeColor = interpolateToGold(wave.color, highlight);
 
         ctx.save();
         ctx.shadowBlur = activeGlow;
-        ctx.shadowColor = wave.color;
+        ctx.shadowColor = activeColor;
 
         // 主波线
         ctx.beginPath();
@@ -161,7 +176,7 @@ function WaveFlow() {
           if (x === 0) ctx.moveTo(x, y);
           else ctx.lineTo(x, y);
         }
-        ctx.strokeStyle = wave.color;
+        ctx.strokeStyle = activeColor;
         ctx.globalAlpha = activeAlpha;
         ctx.lineWidth = activeWidth;
         ctx.lineCap = "round";
@@ -175,7 +190,7 @@ function WaveFlow() {
           if (x === 0) ctx.moveTo(x, y);
           else ctx.lineTo(x, y);
         }
-        ctx.strokeStyle = wave.color;
+        ctx.strokeStyle = activeColor;
         ctx.globalAlpha = activeAlpha * 0.5;
         ctx.lineWidth = activeWidth * 0.6;
         ctx.stroke();
@@ -193,13 +208,21 @@ function WaveFlow() {
         const x = progress * w;
         const y = wave.baseY + wave.amplitude * Math.sin(x * wave.frequency + tSec * wave.speed + wave.phase);
 
+        // 计算该波浪的高亮强度
+        let dotHighlight = 0;
+        const dotDistY = Math.abs(mouse.y - wave.baseY);
+        if (dotDistY < 120 && mouse.x > 0) {
+          dotHighlight = (1 - dotDistY / 120) ** 2;
+        }
+        const dotColor = interpolateToGold(wave.color, dotHighlight);
+
         const pulse = 0.5 + 0.5 * Math.sin(tSec * 2 + i);
         ctx.beginPath();
         ctx.arc(x, y, 2 + pulse, 0, Math.PI * 2);
-        ctx.fillStyle = wave.color;
+        ctx.fillStyle = dotColor;
         ctx.globalAlpha = 0.4 * pulse;
         ctx.shadowBlur = 10;
-        ctx.shadowColor = wave.color;
+        ctx.shadowColor = dotColor;
         ctx.fill();
         ctx.shadowBlur = 0;
         ctx.globalAlpha = 1;
