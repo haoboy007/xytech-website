@@ -75,8 +75,10 @@ export default function Navbar({ scrolled }: NavbarProps) {
         >
           <img
             src="/logo.png"
-            alt="雄元科技"
+            alt="雄元科技 XYTech 品牌Logo"
             className="w-9 h-9 rounded-full object-cover shrink-0"
+            width="36"
+            height="36"
           />
           <div className="leading-none">
             <div className={`font-semibold text-sm tracking-wider ${isDark ? "text-white" : "text-foreground"}`}>

@@ -43,8 +43,10 @@ export default function Footer() {
             <div className="flex items-center gap-2.5 mb-4">
               <img
                 src="/logo.png"
-                alt="雄元科技"
+                alt="雄元科技 XYTech 品牌Logo"
                 className="w-9 h-9 rounded-full object-cover shrink-0"
+                width="36"
+                height="36"
               />
               <div className="leading-none">
                 <div className="text-foreground font-semibold text-sm tracking-wider">雄元科技</div>

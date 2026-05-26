@@ -26,6 +26,8 @@ import {
 import { toast } from "sonner";
 import { supabase } from "@/db/supabase";
 import Footer from "@/components/Footer";
+import SeoHelmet from "@/components/seo/SeoHelmet";
+import JsonLd, { breadcrumbLd, faqLd } from "@/components/seo/JsonLd";
 
 // 动画变体
 const fadeInUp = {
@@ -879,16 +881,46 @@ export default function PartnerPage() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // 动态设置页面标题
-  useEffect(() => {
-    document.title = "合伙人招募 — 共拓AI智能体蓝海市场 | 雄元科技 XYAI";
-    return () => {
-      document.title = "雄元科技官网 | XYTECH";
-    };
-  }, []);
+  // 合伙人页面面包屑
+  const partnerBreadcrumb = breadcrumbLd([
+    { name: "首页", item: "https://www.cnxy.tech/" },
+    { name: "合伙人招募", item: "https://www.cnxy.tech/partner" },
+  ]);
+
+  // 合伙人FAQ（GEO优化）
+  const partnerFaq = faqLd([
+    {
+      question: "XYAI合伙人招募的合作模式有哪些？",
+      answer: "XYAI提供三种合作模式：渠道合伙人（无需保证金，每单返佣，总部培训与营销支持）、城市合伙人（保证金2万元起，区域独家保护，年度返点+股权激励）、战略合伙人（深度合作，联合品牌运营，最高等级分成，总部专属驻场支持）。",
+    },
+    {
+      question: "成为XYAI合伙人需要什么条件？",
+      answer: "需要认同XYAI价值观、具备行业或区域资源、有持续学习AI产品知识的意愿、拥有合法经营主体（个人或机构均可）。工商注册合规，具备签约和开票能力。",
+    },
+    {
+      question: "XYAI智能体平台覆盖哪些行业？",
+      answer: "XYAI覆盖智能制造、智慧零售、智慧物流、智能碳排放管理、智慧光伏运维、智能售电及虚拟电厂六大行业场景，为各行各业量身定制产业智能体。",
+    },
+    {
+      question: "如何申请成为XYAI合伙人？",
+      answer: "您可以在合伙人招募页面填写申请表单，或拨打商务电话18301592576，也可以发送邮件至hezuo@cnxy.tech。商务团队将在1个工作日内与您联系。",
+    },
+  ]);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <SeoHelmet
+        title="合伙人招募 | 共拓AI智能体蓝海市场 — 雄元科技 XYAI"
+        description="XYAI是雄元集团旗下AI智能体SaaS平台，诚邀各行业渠道合伙人，共享AI蓝海红利。提供渠道合伙人、城市合伙人、战略合伙人三种合作模式。"
+        keywords="XYAI合伙人,AI智能体招商,渠道合伙人,城市合伙人,战略合伙人,AI代理招募,智能体合作,雄元科技招商"
+        canonical="https://www.cnxy.tech/partner"
+        ogTitle="合伙人招募 | 共拓AI智能体蓝海市场 — 雄元科技 XYAI"
+        ogDescription="XYAI诚邀各行业渠道合伙人，共享AI蓝海红利。三种合作模式，全方位赋能支持。"
+        ogUrl="https://www.cnxy.tech/partner"
+      />
+      <JsonLd data={partnerBreadcrumb} id="breadcrumb-ld" />
+      <JsonLd data={partnerFaq} id="partner-faq-ld" />
+
       <PartnerNavbar scrolled={scrolled} />
       <main>
         <PartnerHero />
