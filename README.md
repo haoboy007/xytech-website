@@ -96,3 +96,5 @@ Vite、TypeScript、React、Supabase
 ## 了解更多
 
 您也可以查看帮助文档：[源码导出](https://cloud.baidu.com/doc/MIAODA/s/Xmewgmsq7)，了解更多详细内容。
+
+<!-- 部署测试标记: 2026-05-26 v55 -->
