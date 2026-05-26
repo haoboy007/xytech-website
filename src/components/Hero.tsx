@@ -136,16 +136,22 @@ function WaveFlow() {
       for (const wave of waves) {
         // 鼠标附近振幅增大
         let mouseAmpMult = 1;
+        let highlight = 0; // 高亮强度 0~1
         const mouseDistY = Math.abs(mouse.y - wave.baseY);
         if (mouseDistY < 120 && mouse.x > 0) {
           const mouseDistX = Math.abs(mouse.x - w / 2);
           mouseAmpMult = 1 + (1 - mouseDistY / 120) * 0.6;
+          // 高亮强度：距离越近越亮，使用平方曲线自然衰减
+          highlight = (1 - mouseDistY / 120) ** 2;
         }
 
         const amp = wave.amplitude * mouseAmpMult;
+        const activeAlpha = wave.alpha + highlight * 0.55;
+        const activeGlow = wave.glow + highlight * 28;
+        const activeWidth = wave.width + highlight * 1.8;
 
         ctx.save();
-        ctx.shadowBlur = wave.glow;
+        ctx.shadowBlur = activeGlow;
         ctx.shadowColor = wave.color;
 
         // 主波线
@@ -156,13 +162,13 @@ function WaveFlow() {
           else ctx.lineTo(x, y);
         }
         ctx.strokeStyle = wave.color;
-        ctx.globalAlpha = wave.alpha;
-        ctx.lineWidth = wave.width;
+        ctx.globalAlpha = activeAlpha;
+        ctx.lineWidth = activeWidth;
         ctx.lineCap = "round";
         ctx.lineJoin = "round";
         ctx.stroke();
 
-        // 副波线（相位偏移，更细更淡）
+        // 副波线（相位偏移，更细更淡，同样受高亮影响）
         ctx.beginPath();
         for (let x = 0; x <= w; x += step) {
           const y = wave.baseY + amp * 0.5 * Math.sin(x * wave.frequency * 1.3 + tSec * wave.speed * 0.8 + wave.phase + Math.PI / 3);
@@ -170,8 +176,8 @@ function WaveFlow() {
           else ctx.lineTo(x, y);
         }
         ctx.strokeStyle = wave.color;
-        ctx.globalAlpha = wave.alpha * 0.5;
-        ctx.lineWidth = wave.width * 0.6;
+        ctx.globalAlpha = activeAlpha * 0.5;
+        ctx.lineWidth = activeWidth * 0.6;
         ctx.stroke();
 
         ctx.restore();
