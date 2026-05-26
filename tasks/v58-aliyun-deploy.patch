@@ -1,0 +1,347 @@
+From 52b1e0d56207212aad8e0dbf01139e8fdd8a6eef Mon Sep 17 00:00:00 2001
+From: haoboy007 <haoboy007@users.noreply.github.com>
+Date: Wed, 27 May 2026 01:11:38 +0800
+Subject: [PATCH] =?UTF-8?q?feat(deploy):=20=E6=B7=BB=E5=8A=A0=E9=98=BF?=
+ =?UTF-8?q?=E9=87=8C=E4=BA=91=E6=9C=8D=E5=8A=A1=E5=99=A8=E8=87=AA=E5=8A=A8?=
+ =?UTF-8?q?=E9=83=A8=E7=BD=B2=E5=B7=A5=E4=BD=9C=E6=B5=81?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+版本: v58
+
+新增内容：
+- .github/workflows/deploy-aliyun.yml: GitHub Actions工作流，构建后通过SSH/rsync部署到阿里云
+- tasks/aliyun-deploy-guide.md: 完整部署指南（宝塔配置、SSH密钥、Secrets设置）
+- tasks/setup-aliyun-server.sh: 服务器初始化脚本（一键生成SSH密钥、创建目录）
+
+部署说明：
+1. 在宝塔终端执行 setup-aliyun-server.sh 生成SSH密钥
+2. 在GitHub仓库Settings → Secrets中添加 ALIYUN_HOST/USERNAME/SSH_KEY/TARGET_DIR
+3. push到main分支自动触发部署（BASE_URL=/ 适配自定义域名）
+4. 构建产物通过rsync上传到 /www/wwwroot/xytech-website
+
+推送时间: 2026-05-26
+---
+ .github/workflows/deploy-aliyun.yml |  49 ++++++++
+ tasks/aliyun-deploy-guide.md        | 174 ++++++++++++++++++++++++++++
+ tasks/setup-aliyun-server.sh        |  67 +++++++++++
+ 3 files changed, 290 insertions(+)
+ create mode 100644 .github/workflows/deploy-aliyun.yml
+ create mode 100644 tasks/aliyun-deploy-guide.md
+ create mode 100644 tasks/setup-aliyun-server.sh
+
+diff --git a/.github/workflows/deploy-aliyun.yml b/.github/workflows/deploy-aliyun.yml
+new file mode 100644
+index 0000000..c89010c
+--- /dev/null
++++ b/.github/workflows/deploy-aliyun.yml
+@@ -0,0 +1,49 @@
++name: Deploy to Aliyun Server
++
++on:
++  push:
++    branches: [main]
++  workflow_dispatch:
++
++jobs:
++  build-and-deploy:
++    runs-on: ubuntu-latest
++    steps:
++      - name: Checkout
++        uses: actions/checkout@v4
++
++      - name: Install pnpm
++        uses: pnpm/action-setup@v4
++        with:
++          run_install: false
++
++      - name: Setup Node
++        uses: actions/setup-node@v4
++        with:
++          node-version: 18
++          cache: pnpm
++
++      - name: Install dependencies
++        run: pnpm install --frozen-lockfile
++
++      - name: Build for Aliyun
++        run: pnpm exec vite build
++        env:
++          BASE_URL: /
++          SKIP_MIAODA_PLUGIN: "true"
++
++      - name: Deploy to Aliyun via SSH
++        run: |
++          mkdir -p ~/.ssh
++          echo "${{ secrets.ALIYUN_SSH_KEY }}" > ~/.ssh/deploy_key
++          chmod 600 ~/.ssh/deploy_key
++          cat >> ~/.ssh/config <<EOF
++          Host aliyun
++            HostName ${{ secrets.ALIYUN_HOST }}
++            User ${{ secrets.ALIYUN_USERNAME }}
++            IdentityFile ~/.ssh/deploy_key
++            StrictHostKeyChecking no
++            UserKnownHostsFile /dev/null
++          EOF
++          chmod 600 ~/.ssh/config
++          rsync -avz --delete -e "ssh -F ~/.ssh/config" dist/ aliyun:${{ secrets.ALIYUN_TARGET_DIR }}/
+\ No newline at end of file
+diff --git a/tasks/aliyun-deploy-guide.md b/tasks/aliyun-deploy-guide.md
+new file mode 100644
+index 0000000..401eb12
+--- /dev/null
++++ b/tasks/aliyun-deploy-guide.md
+@@ -0,0 +1,174 @@
++# 雄元科技官网 — 阿里云服务器自动部署指南
++
++> 服务器信息：阿里上海轻量云 · IP: 47.100.36.211
++> 宝塔面板：http://47.100.36.211:8888
++
++---
++
++## 一、服务器端配置（在宝塔面板执行）
++
++### 1. 创建网站目录
++
++登录宝塔面板 → 终端，执行：
++
++```bash
++mkdir -p /www/wwwroot/xytech-website
++chmod 755 /www/wwwroot/xytech-website
++```
++
++### 2. 添加 SSH 公钥（用于 GitHub Actions 自动部署）
++
++在宝塔终端执行以下命令，生成密钥对：
++
++```bash
++# 生成密钥对
++ssh-keygen -t ed25519 -C "github-actions-deploy" -f /root/.ssh/github_actions -N ""
++
++# 添加公钥到 authorized_keys
++cat /root/.ssh/github_actions.pub >> /root/.ssh/authorized_keys
++chmod 600 /root/.ssh/authorized_keys
++
++# 显示公钥内容（供核对）
++echo "=== SSH 公钥 ==="
++cat /root/.ssh/github_actions.pub
++
++# 显示私钥内容（需要复制到 GitHub Secrets）
++echo ""
++echo "=== SSH 私钥（请完整复制以下内容）==="
++cat /root/.ssh/github_actions
++```
++
++> ⚠️ **安全提醒**：私钥内容请妥善保管，仅用于 GitHub Secrets 配置。
++
++---
++
++## 二、宝塔面板站点配置
++
++### 1. 添加站点
++
++1. 宝塔面板 → 网站 → 添加站点
++2. 域名：填写 `www.cnxy.tech`（或您的实际域名）
++3. 根目录：`/www/wwwroot/xytech-website`
++4. 选择 PHP 版本：**纯静态**
++5. 点击提交
++
++### 2. 配置伪静态（SPA 路由回退）
++
++1. 进入站点设置 → 伪静态
++2. 选择模板：`thinkphp` 或输入以下内容：
++
++```nginx
++location / {
++  try_files $uri $uri/ /index.html;
++}
++```
++
++3. 点击保存
++
++### 3. 配置 SSL（可选但强烈建议）
++
++1. 站点设置 → SSL → Let's Encrypt
++2. 勾选域名 → 申请证书
++3. 开启 **强制 HTTPS**
++
++---
++
++## 三、GitHub 仓库 Secrets 配置
++
++### 1. 打开 Secrets 页面
++
++访问：
++```
++https://github.com/haoboy007/xytech-website/settings/secrets/actions
++```
++
++### 2. 添加以下 Secrets
++
++| Secret 名称 | 值 | 说明 |
++|-------------|-----|------|
++| `ALIYUN_HOST` | `47.100.36.211` | 阿里云服务器公网 IP |
++| `ALIYUN_USERNAME` | `root` | SSH 登录用户名 |
++| `ALIYUN_SSH_KEY` | *(私钥内容)* | 上一步生成的私钥完整内容 |
++| `ALIYUN_TARGET_DIR` | `/www/wwwroot/xytech-website` | 网站部署目录 |
++
++### 3. 添加 Secret 步骤
++
++1. 点击 **New repository secret**
++2. Name 填入上表中的名称
++3. Secret 填入对应的值
++4. 点击 **Add secret**
++
++---
++
++## 四、触发自动部署
++
++### 方式 1：推送代码自动触发
++
++本地推送代码到 main 分支：
++
++```bash
++git add -A
++git commit -m "更新网站内容"
++git push origin main
++```
++
++GitHub Actions 将自动：
++1. 构建网站（BASE_URL=/，适配自定义域名）
++2. 通过 SSH 上传到阿里云服务器
++
++### 方式 2：手动触发
++
++1. 打开 GitHub 仓库 → Actions → **Deploy to Aliyun Server**
++2. 点击 **Run workflow** → 选择分支 `main` → **Run workflow**
++
++---
++
++## 五、查看部署状态
++
++### 查看 Actions 运行日志
++
++https://github.com/haoboy007/xytech-website/actions
++
++### 查看部署后的网站
++
++等待约 1-2 分钟后访问：
++- http://www.cnxy.tech（配置域名后）
++- http://47.100.36.211（直接使用 IP）
++
++---
++
++## 六、常见问题
++
++### Q1: SSH 连接失败
++
++检查：
++1. 阿里云安全组是否放行 22 端口
++2. `/root/.ssh/authorized_keys` 权限是否为 600
++3. SSH 私钥是否正确复制到 GitHub Secrets
++
++### Q2: 网站刷新 404
++
++检查宝塔伪静态配置：
++```nginx
++location / {
++  try_files $uri $uri/ /index.html;
++}
++```
++
++### Q3: 样式或脚本加载失败
++
++检查 `BASE_URL` 环境变量是否为 `/`（阿里云使用自定义域名时）。
++
++---
++
++## 七、安全建议
++
++1. ✅ 修改宝塔面板默认密码
++2. ✅ 修改服务器 root 密码：`passwd root`
++3. ✅ 阿里云安全组仅开放必要端口（22/80/443/8888）
++4. ✅ 配置域名 DNS 解析到 47.100.36.211
++5. ✅ 启用宝塔面板 SSL
++
++---
++
++*文档生成时间: 2026-05-26*
+\ No newline at end of file
+diff --git a/tasks/setup-aliyun-server.sh b/tasks/setup-aliyun-server.sh
+new file mode 100644
+index 0000000..3621061
+--- /dev/null
++++ b/tasks/setup-aliyun-server.sh
+@@ -0,0 +1,67 @@
++#!/bin/bash
++# 雄元科技官网 — 阿里云服务器初始化脚本
++# 在宝塔面板终端中执行
++
++set -e
++
++echo "========================================"
++echo "  雄元科技官网 — 服务器初始化脚本"
++echo "========================================"
++
++# 1. 创建网站目录
++echo ""
++echo "[1/4] 创建网站目录..."
++mkdir -p /www/wwwroot/xytech-website
++chmod 755 /www/wwwroot/xytech-website
++echo "✅ 目录已创建: /www/wwwroot/xytech-website"
++
++# 2. 生成 SSH 密钥对（用于 GitHub Actions 部署）
++echo ""
++echo "[2/4] 生成 SSH 密钥对..."
++if [ -f /root/.ssh/github_actions ]; then
++    echo "⚠️ 密钥对已存在，跳过生成"
++else
++    ssh-keygen -t ed25519 -C "github-actions-deploy" -f /root/.ssh/github_actions -N ""
++    cat /root/.ssh/github_actions.pub >> /root/.ssh/authorized_keys
++    chmod 600 /root/.ssh/authorized_keys
++    echo "✅ 密钥对已生成"
++fi
++
++# 3. 显示密钥信息
++echo ""
++echo "[3/4] SSH 密钥信息"
++echo "----------------------------------------"
++echo ""
++echo "【公钥】（已添加到 authorized_keys）:"
++cat /root/.ssh/github_actions.pub
++echo ""
++echo "----------------------------------------"
++echo ""
++echo "【私钥】请复制以下内容，添加到 GitHub Secrets（ALIYUN_SSH_KEY）:"
++echo ""
++cat /root/.ssh/github_actions
++echo ""
++echo "----------------------------------------"
++
++# 4. 检查宝塔面板
++echo ""
++echo "[4/4] 环境检查"
++if command -v bt &> /dev/null; then
++    echo "✅ 宝塔面板已安装"
++    bt default | head -10
++else
++    echo "⚠️ 未检测到宝塔面板命令"
++fi
++
++echo ""
++echo "========================================"
++echo "  初始化完成！"
++echo "========================================"
++echo ""
++echo "下一步操作："
++echo "1. 复制上面的【私钥】内容"
++echo "2. 访问 https://github.com/haoboy007/xytech-website/settings/secrets/actions"
++echo "3. 添加 Secrets：ALIYUN_SSH_KEY、ALIYUN_HOST、ALIYUN_USERNAME、ALIYUN_TARGET_DIR"
++echo "4. 在宝塔面板中添加站点：www.cnxy.tech → /www/wwwroot/xytech-website"
++echo "5. 配置伪静态规则（详见 aliyun-deploy-guide.md）"
++echo ""
+\ No newline at end of file
+-- 
+2.50.1
+
