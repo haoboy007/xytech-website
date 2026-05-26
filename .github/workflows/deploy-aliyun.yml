@@ -1,0 +1,49 @@
+name: Deploy to Aliyun Server
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build for Aliyun
+        run: pnpm exec vite build
+        env:
+          BASE_URL: /
+          SKIP_MIAODA_PLUGIN: "true"
+
+      - name: Deploy to Aliyun via SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.ALIYUN_SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          cat >> ~/.ssh/config <<EOF
+          Host aliyun
+            HostName ${{ secrets.ALIYUN_HOST }}
+            User ${{ secrets.ALIYUN_USERNAME }}
+            IdentityFile ~/.ssh/deploy_key
+            StrictHostKeyChecking no
+            UserKnownHostsFile /dev/null
+          EOF
+          chmod 600 ~/.ssh/config
+          rsync -avz --delete -e "ssh -F ~/.ssh/config" dist/ aliyun:${{ secrets.ALIYUN_TARGET_DIR }}/
