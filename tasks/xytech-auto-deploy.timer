@@ -1,0 +1,13 @@
+[Unit]
+Description=XYTech Website Auto Deploy Timer
+
+[Timer]
+# 每天凌晨2点自动检查并部署
+OnCalendar=*-*-* 02:00:00
+# 服务启动后5分钟也执行一次
+OnBootSec=5min
+# 确保不会错过定时点
+Persistent=true
+
+[Install]
+WantedBy=timers.target

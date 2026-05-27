@@ -1,0 +1,10 @@
+[Unit]
+Description=XYTech Website Auto Deploy
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/www/wwwroot/xytech-auto-deploy.sh
+User=root
+StandardOutput=journal
+StandardError=journal
